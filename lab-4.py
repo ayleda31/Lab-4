@@ -48,27 +48,25 @@ try:
             F[i][j] = A[i][j]
 
     size=row_q//2
-    flag=0
-    for i in range(1, row_q):
-        for j in range(i):
-            if A[i][j] == A[row_q-j-1][row_q-i-1]:
-                flag+=1
     D = []
     submatrix(D)
     for i in range(size):
         for j in range(size):
             D[i][j]=F[size+i][j]
-            
-    if flag==1:
+    f=0        
+    for i in range(row_q):
+        for j in range(row_q-i-1):
+            if A[i][j] == A[row_q-j-1][row_q-i-1]:
+                f+=1
+                
+    if f==(row_q*row_q-row_q)/2:
         for i in range(size):
             for j in range(size):
                 if (i == 0) and (j < size - 1 - i) and (j > 0):
                     D[i][j], D[j][size - 1] = D[j][size - 1], D[i][j]
                 if (i < j) and (j < size - 1 - i) and (i > 0):
                     D[i][j], D[j][size - 1 - i] = D[j][size - 1 - i], D[i][j]
-    for i in range(size):
-        for j in range(size):
-            D[i][j]=F[size+i][size+j]
+    
     else:
         for i in range(size):
             for j in range(size):
